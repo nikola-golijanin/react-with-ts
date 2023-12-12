@@ -1,18 +1,15 @@
-import { ITodo } from "../models/todo";
 import TodoItem from "./TodoItem";
 import classes from "./Todos.module.css";
+import { useContext } from "react";
+import { TodosContext } from "../store/todos-context";
 
-interface Props {
-  children?: React.ReactNode;
-  items: ITodo[];
-  onRemoveTodo: (id: string) => void;
-}
+export function Todos() {
+  const todoCtx = useContext(TodosContext);
 
-export function Todos({ items, children, onRemoveTodo }: Props) {
   return (
     <ul className={classes.todos}>
-      {items.map((item) => (
-        <TodoItem todo={item} key={item.id} onRemoveTodo={onRemoveTodo} />
+      {todoCtx.items.map((item) => (
+        <TodoItem todo={item} key={item.id} onRemoveTodo={todoCtx.removeTodo} />
       ))}
     </ul>
   );

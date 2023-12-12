@@ -1,12 +1,10 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { ITodo } from "../models/todo";
 import classes from "./NewTodo.module.css";
+import { TodosContext } from "../store/todos-context";
 
-interface Props {
-  todoHandler: (newTodo: ITodo) => void;
-}
-
-export function NewTodo({ todoHandler }: Props) {
+export function NewTodo() {
+  const todoCtx = useContext(TodosContext);
   const textRef = useRef<HTMLInputElement>(null);
 
   function formHandler(event: React.FormEvent) {
@@ -21,7 +19,7 @@ export function NewTodo({ todoHandler }: Props) {
         text: text,
       };
 
-      todoHandler(newTodo);
+      todoCtx.addTodo(newTodo);
       textRef.current!.value = "";
     }
   }

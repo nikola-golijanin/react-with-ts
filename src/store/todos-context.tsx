@@ -1,5 +1,5 @@
 import { ITodo } from "../models/todo";
-import React, { useState } from "react";
+import React, { PropsWithChildren, useState } from "react";
 
 interface Context {
   items: ITodo[];
@@ -17,7 +17,7 @@ export const TodosContext = React.createContext<Context>({
   removeTodo: (id: string) => {},
 });
 
-const TodosContextProvider: React.FC = (props: Props) => {
+const TodosContextProvider = (props: Props) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
 
   function addTodoHandler(newTodo: ITodo): void {
